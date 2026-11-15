@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 #[Fillable(['name', 'email', 'phone', 'address'])]
 class Company extends Model
@@ -28,11 +29,16 @@ class Company extends Model
 
     public function warehouses(): HasMany
     {
-    return $this->hasMany(Warehouse::class);
+        return $this->hasMany(Warehouse::class);
     }
 
     public function roles(): HasMany
-{
-    return $this->hasMany(Role::class);
-}
+    {
+        return $this->hasMany(Role::class);
+    }
+
+    public function setting(): HasOne
+    {
+        return $this->hasOne(CompanySetting::class);
+    }
 }
