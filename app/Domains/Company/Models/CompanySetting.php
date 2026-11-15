@@ -4,10 +4,13 @@ namespace App\Domains\Company\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CompanySetting extends Model
 {
+    protected $fillable = [
+        'allow_negative_stock',
+    ];
+
     protected function casts(): array
     {
         return [
@@ -18,10 +21,5 @@ class CompanySetting extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
-    }
-
-    public function setting(): HasOne
-    {
-        return $this->hasOne(CompanySetting::class);
     }
 }

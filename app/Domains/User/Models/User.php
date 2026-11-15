@@ -48,6 +48,21 @@ class User extends Authenticatable implements MustVerifyEmail{
             ->withTimestamps();
     }
 
+    public function hasPermission(string $permission): bool
+    {
+        // The Owner has access to everything.
+        if ($this->roles()->where('key', 'owner')->exists()) {
+            return true;
+        }
+
+        return $this->roles()
+            ->whereHas('permissions', function ($query) use ($permission) {
+                $query->where('key', $permission);
+            })
+            ->exists();
+    }
+
+
     public function sendEmailVerificationNotification(): void
     {
         $this->notify(new VerifyEmailNotification());

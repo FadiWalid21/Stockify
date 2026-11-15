@@ -6,12 +6,16 @@ use App\Domains\Company\Models\Company;
 use App\Domains\Company\Models\TenantModel;
 use App\Domains\Product\Models\Product;
 use App\Domains\Warehouse\Models\Warehouse;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
 
 class InventoryBalance extends TenantModel
 {
+    protected $fillable = [
+        'product_id',
+        'warehouse_id',
+        'quantity',
+    ];
+
     protected function casts(): array
     {
         return [
