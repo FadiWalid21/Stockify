@@ -89,6 +89,18 @@ Route::prefix('v1')->group(function () {
             [InventoryController::class, 'stockOut'])
             ->middleware('permission:inventory.stock_out');
 
+        Route::post('inventory/opening-balance',
+        [InventoryController::class, 'openingBalance'])
+            ->middleware('permission:inventory.adjust');
+
+        Route::post('inventory/adjustments',
+        [InventoryController::class, 'adjust'])
+            ->middleware('permission:inventory.adjust');
+
+        Route::get('/inventory/balances',
+        [InventoryController::class, 'balances'])
+            ->middleware('permission:inventory.view');
+
         // Categories
         Route::apiResource('categories', CategoryController::class);
 
