@@ -440,4 +440,74 @@ class InventoryService
             )
         );
     }
+
+    public function getMovements(array $params = [])
+    {
+        $query = StockMovement::query()
+            ->with([
+                'product',
+                'warehouse',
+                'inventoryOperation',
+            ]);
+
+        // Filter by product.
+        if (! empty($params['product_id'])) {
+            $query->where('product_id', $params['product_id']);
+        }
+
+        // Filter by warehouse.
+        if (! empty($params['warehouse_id'])) {
+            $query->where('warehouse_id', $params['warehouse_id']);
+        }
+
+        // Filter by movement type.
+        if (! empty($params['type'])) {
+            $query->where('type', $params['type']);
+        }
+
+        // Filter by date range.
+        if (! empty($params['date_from'])) {
+            $query->whereDate('created_at', '>=', $params['date_from']);
+        }
+
+        if (! empty($params['date_to'])) {
+            $query->whereDate('created_at', '<=', $params['date_to']);
+        }
+
+        // Search by product name or SKU.
+        $search = trim($params['search'] ?? '');
+
+        if ($search !== '') {
+            $query->whereHas('product', function (Builder $productQuery) use ($search) {
+                $productQuery->where(function (Builder $productQuery) use ($search) {
+                    $productQuery
+                        ->where('name', 'ILIKE', "%{$search}%")
+                        ->orWhere('sku', 'ILIKE', "%{$search}%");
+                });
+            });
+        }
+
+        // Apply sorting.
+        QueryFilter::apply(
+            query: $query,
+            params: $params,
+            sortableFields: [
+                'created_at',
+                'quantity',
+            ],
+        );
+
+        // Default ordering.
+        if (empty($params['sort_by'])) {
+            $query->latest('created_at');
+        }
+
+        return $query->paginate(
+            Pagination::perPage(
+                isset($params['per_page'])
+                    ? (int) $params['per_page']
+                    : null
+            )
+        );
+    }
 }

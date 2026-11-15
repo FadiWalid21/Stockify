@@ -101,6 +101,10 @@ Route::prefix('v1')->group(function () {
         [InventoryController::class, 'balances'])
             ->middleware('permission:inventory.view');
 
+        Route::get('/inventory/movements',
+        [InventoryController::class, 'movements'])
+            ->middleware('permission:inventory.view');
+
         // Categories
         Route::apiResource('categories', CategoryController::class);
 

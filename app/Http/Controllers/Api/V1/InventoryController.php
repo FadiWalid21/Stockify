@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Api\V1;
 use App\Domains\Inventory\Services\InventoryService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InventoryBalanceIndexRequest;
+use App\Http\Requests\StockMovementIndexRequest;
 use App\Http\Requests\StoreInventoryAdjustmentRequest;
 use App\Http\Requests\StoreOpeningBalanceRequest;
 use App\Http\Requests\StoreStockInRequest;
 use App\Http\Requests\StoreStockOutRequest;
 use App\Http\Resources\InventoryBalanceResource;
 use App\Http\Resources\InventoryOperationResource;
+use App\Http\Resources\StockMovementResource;
 use Illuminate\Http\JsonResponse;
 
 class InventoryController extends Controller
@@ -103,5 +105,14 @@ class InventoryController extends Controller
                 'total' => $balances->total(),
             ],
         ]);
+    }
+
+    public function movements(StockMovementIndexRequest $request)
+    {
+        $movements = $this->inventoryService->getMovements(
+            $request->validated()
+        );
+
+        return StockMovementResource::collection($movements);
     }
 }
