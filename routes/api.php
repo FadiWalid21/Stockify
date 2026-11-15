@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\Auth\VerifyEmailController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\InventoryController;
 use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\Api\V1\StockTransferController;
 use App\Http\Controllers\Api\V1\UnitController;
 use App\Http\Controllers\Api\V1\WarehouseController;
 use App\Http\Middleware\SetTenantContext;
@@ -88,6 +89,50 @@ Route::prefix('v1')->group(function () {
         Route::post('inventory/stock-out',
             [InventoryController::class, 'stockOut'])
             ->middleware('permission:inventory.stock_out');
+
+        Route::post('inventory/opening-balance',
+        [InventoryController::class, 'openingBalance'])
+            ->middleware('permission:inventory.adjust');
+
+        Route::post('inventory/adjustments',
+        [InventoryController::class, 'adjust'])
+            ->middleware('permission:inventory.adjust');
+
+        Route::get('/inventory/balances',
+        [InventoryController::class, 'balances'])
+            ->middleware('permission:inventory.view');
+
+        Route::get('/inventory/movements',
+        [InventoryController::class, 'movements'])
+            ->middleware('permission:inventory.view');
+
+        Route::get('/transfers',
+        [StockTransferController::class, 'index'])
+            ->middleware('permission:transfers.view');
+
+        Route::post('/transfers',
+        [StockTransferController::class, 'store'])
+            ->middleware('permission:transfers.create');
+
+        Route::get('/transfers/{transferId}',
+        [StockTransferController::class, 'show'])
+            ->middleware('permission:transfers.view');
+
+        Route::post('/transfers/{transferId}/approve',
+        [StockTransferController::class, 'approve'])
+            ->middleware('permission:transfers.approve');
+
+        Route::post('/transfers/{transferId}/dispatch',
+        [StockTransferController::class, 'dispatch'])
+            ->middleware('permission:transfers.dispatch');
+
+        Route::post('/transfers/{transferId}/receive',
+        [StockTransferController::class, 'receive'])
+            ->middleware('permission:transfers.receive');
+
+        Route::post('/transfers/{transferId}/cancel',
+        [StockTransferController::class, 'cancel'])
+            ->middleware('permission:transfers.approve');
 
         // Categories
         Route::apiResource('categories', CategoryController::class);

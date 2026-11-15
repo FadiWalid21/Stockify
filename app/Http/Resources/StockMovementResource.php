@@ -11,8 +11,31 @@ class StockMovementResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'product_id' => $this->product_id,
-            'warehouse_id' => $this->warehouse_id,
+
+            'product' => [
+                'id' => $this->product_id,
+                'name' => $this->whenLoaded('product', fn () => $this->product->name),
+                'sku' => $this->whenLoaded('product', fn () => $this->product->sku),
+            ],
+
+            'warehouse' => [
+                'id' => $this->warehouse_id,
+                'name' => $this->whenLoaded('warehouse', fn () => $this->warehouse->name),
+                'code' => $this->whenLoaded('warehouse', fn () => $this->warehouse->code),
+            ],
+
+            'inventory_operation' => [
+                'id' => $this->inventory_operation_id,
+                'type' => $this->whenLoaded(
+                    'inventoryOperation',
+                    fn () => $this->inventoryOperation->type->value
+                ),
+                'reference' => $this->whenLoaded(
+                    'inventoryOperation',
+                    fn () => $this->inventoryOperation->reference
+                ),
+            ],
+
             'quantity' => $this->quantity,
             'type' => $this->type->value,
             'notes' => $this->notes,

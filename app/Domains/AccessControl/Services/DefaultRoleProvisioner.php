@@ -42,6 +42,8 @@ class DefaultRoleProvisioner
                     'transfers.view',
                     'transfers.create',
                     'transfers.approve',
+                    'transfers.dispatch',
+                    'transfers.receive',
                 ],
             ],
 
@@ -55,6 +57,8 @@ class DefaultRoleProvisioner
                     'inventory.stock_in',
                     'inventory.stock_out',
                     'transfers.view',
+                    'transfers.dispatch',
+                    'transfers.receive',
                 ],
             ],
         ];

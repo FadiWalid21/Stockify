@@ -34,6 +34,8 @@ class PermissionSeeder extends Seeder
             ['name' => 'View Transfers', 'key' => 'transfers.view'],
             ['name' => 'Create Transfers', 'key' => 'transfers.create'],
             ['name' => 'Approve Transfers', 'key' => 'transfers.approve'],
+            ['name' => 'Dispatch Transfers', 'key' => 'transfers.dispatch'],
+            ['name' => 'Receive Transfers', 'key' => 'transfers.receive'],
 
             // Users and access control
             ['name' => 'View Users', 'key' => 'users.view'],
