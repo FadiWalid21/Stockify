@@ -41,6 +41,12 @@ class PermissionSeeder extends Seeder
             ['name' => 'View Users', 'key' => 'users.view'],
             ['name' => 'Manage Users', 'key' => 'users.manage'],
             ['name' => 'Manage Roles', 'key' => 'roles.manage'],
+
+            // Suppliers
+            ['name' => 'View Suppliers', 'key' => 'suppliers.view'],
+            ['name' => 'Create Suppliers', 'key' => 'suppliers.create'],
+            ['name' => 'Update Suppliers', 'key' => 'suppliers.update'],
+            ['name' => 'Delete Suppliers', 'key' => 'suppliers.delete'],
         ];
 
         foreach ($permissions as $permission) {

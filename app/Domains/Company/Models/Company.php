@@ -4,6 +4,7 @@ namespace App\Domains\Company\Models;
 
 use App\Domains\AccessControl\Models\Role;
 use App\Domains\Category\Models\Category;
+use App\Domains\Supplier\Models\Supplier;
 use App\Domains\User\Models\User;
 use App\Domains\Warehouse\Models\Warehouse;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -40,5 +41,10 @@ class Company extends Model
     public function setting(): HasOne
     {
         return $this->hasOne(CompanySetting::class);
+    }
+
+    public function suppliers(): HasMany
+    {
+        return $this->hasMany(Supplier::class);
     }
 }

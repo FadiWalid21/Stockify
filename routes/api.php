@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\InventoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\StockTransferController;
+use App\Http\Controllers\Api\V1\SupplierController;
 use App\Http\Controllers\Api\V1\UnitController;
 use App\Http\Controllers\Api\V1\WarehouseController;
 use App\Http\Middleware\SetTenantContext;
@@ -133,6 +134,39 @@ Route::prefix('v1')->group(function () {
         Route::post('/transfers/{transferId}/cancel',
         [StockTransferController::class, 'cancel'])
             ->middleware('permission:transfers.approve');
+
+            // Suppliers
+        Route::get('/suppliers',
+        [SupplierController::class, 'index'])
+            ->middleware('permission:suppliers.view');
+
+        Route::post('/suppliers',
+        [SupplierController::class, 'store'])
+            ->middleware('permission:suppliers.create');
+
+        Route::get('/suppliers/{supplier}',
+        [SupplierController::class, 'show'])
+            ->middleware('permission:suppliers.view');
+
+        Route::put('/suppliers/{supplier}',
+        [SupplierController::class, 'update'])
+            ->middleware('permission:suppliers.update');
+
+        Route::patch('/suppliers/{supplier}',
+        [SupplierController::class, 'update'])
+            ->middleware('permission:suppliers.update');
+
+        Route::delete('/suppliers/{supplier}',
+        [SupplierController::class, 'destroy'])
+            ->middleware('permission:suppliers.delete');
+
+        Route::patch('/suppliers/{supplier}/activate',
+        [SupplierController::class, 'activate'])
+            ->middleware('permission:suppliers.update');
+
+        Route::patch('/suppliers/{supplier}/deactivate',
+        [SupplierController::class, 'deactivate'])
+            ->middleware('permission:suppliers.update');
 
         // Categories
         Route::apiResource('categories', CategoryController::class);
