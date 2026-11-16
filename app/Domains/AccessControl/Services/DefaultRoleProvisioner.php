@@ -31,35 +31,49 @@ class DefaultRoleProvisioner
                     'products.create',
                     'products.update',
                     'products.delete',
+
                     'categories.view',
                     'categories.manage',
+
                     'warehouses.view',
                     'warehouses.manage',
+
                     'inventory.view',
                     'inventory.stock_in',
                     'inventory.stock_out',
                     'inventory.adjust',
+
                     'transfers.view',
                     'transfers.create',
                     'transfers.approve',
                     'transfers.dispatch',
                     'transfers.receive',
+
                     'suppliers.view',
                     'suppliers.create',
                     'suppliers.update',
                     'suppliers.delete',
+
                     'purchase_orders.view',
                     'purchase_orders.create',
                     'purchase_orders.update',
                     'purchase_orders.approve',
                     'purchase_orders.receive',
                     'purchase_orders.cancel',
+
+                    'purchase_returns.view',
+                    'purchase_returns.create',
+                    'purchase_returns.approve',
+                    'purchase_returns.dispatch',
+                    'purchase_returns.cancel',
+
                     'customers.view',
                     'customers.create',
                     'customers.update',
                     'customers.delete',
                     'customers.activate',
                     'customers.deactivate',
+
                     'sales_orders.view',
                     'sales_orders.create',
                     'sales_orders.update',
@@ -84,6 +98,7 @@ class DefaultRoleProvisioner
                     'transfers.receive',
                     'purchase_orders.view',
                     'purchase_orders.receive',
+                    'purchase_returns.view',
                     'sales_orders.view',
                     'sales_orders.dispatch',
                 ],

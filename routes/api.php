@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\V1\CustomerController;
 use App\Http\Controllers\Api\V1\InventoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\PurchaseOrderController;
+use App\Http\Controllers\Api\V1\PurchaseReturnController;
 use App\Http\Controllers\Api\V1\SalesOrderController;
 use App\Http\Controllers\Api\V1\StockTransferController;
 use App\Http\Controllers\Api\V1\SupplierController;
@@ -267,6 +268,36 @@ Route::prefix('v1')->group(function () {
         Route::post('/sales-orders/{salesOrderId}/dispatch',
         [SalesOrderController::class, 'dispatch'])
             ->middleware('permission:sales_orders.dispatch');
+
+        // Purchase Returns
+        Route::get('/purchase-returns',
+        [PurchaseReturnController::class, 'index'])
+            ->middleware('permission:purchase_returns.view');
+
+        Route::post('/purchase-returns',
+        [PurchaseReturnController::class, 'store'])
+            ->middleware('permission:purchase_returns.create');
+
+        Route::get('/purchase-returns/eligibility/{productId}',
+        [PurchaseReturnController::class, 'eligibility'])
+            ->middleware('permission:purchase_returns.view');
+
+        Route::get('/purchase-returns/{purchaseReturnId}',
+        [PurchaseReturnController::class, 'show'])
+            ->middleware('permission:purchase_returns.view');
+
+        Route::post('/purchase-returns/{purchaseReturnId}/approve',
+        [PurchaseReturnController::class, 'approve'])
+            ->middleware('permission:purchase_returns.approve');
+
+        Route::post('/purchase-returns/{purchaseReturnId}/dispatch',
+        [PurchaseReturnController::class, 'dispatch'])
+            ->middleware('permission:purchase_returns.dispatch');
+
+        Route::post('/purchase-returns/{purchaseReturnId}/cancel',
+        [PurchaseReturnController::class, 'cancel'])
+            ->middleware('permission:purchase_returns.cancel');
+
 
         // Categories
         Route::apiResource('categories', CategoryController::class);
