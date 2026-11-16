@@ -7,6 +7,7 @@ use App\Domains\Category\Models\Category;
 use App\Domains\Company\Models\TenantModel;
 use App\Domains\Inventory\Models\InventoryBalance;
 use App\Domains\Inventory\Models\StockMovement;
+use App\Domains\Purchase\Models\PurchaseOrderItem;
 use App\Domains\Transfer\Models\StockTransferItem;
 use App\Domains\Unit\Models\Unit;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -59,5 +60,10 @@ class Product extends TenantModel
     public function transferItems(): HasMany
     {
         return $this->hasMany(StockTransferItem::class);
+    }
+
+    public function purchaseOrderItems(): HasMany
+    {
+        return $this->hasMany(PurchaseOrderItem::class);
     }
 }

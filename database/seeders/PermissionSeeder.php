@@ -47,6 +47,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'Create Suppliers', 'key' => 'suppliers.create'],
             ['name' => 'Update Suppliers', 'key' => 'suppliers.update'],
             ['name' => 'Delete Suppliers', 'key' => 'suppliers.delete'],
+
+            //Purchase
+            ['name' => 'View Purchase Orders', 'key' => 'purchase_orders.view'],
+            ['name' => 'Create Purchase Orders', 'key' => 'purchase_orders.create'],
+            ['name' => 'Update Purchase Orders', 'key' => 'purchase_orders.update'],
+            ['name' => 'Approve Purchase Orders', 'key' => 'purchase_orders.approve'],
+            ['name' => 'Receive Purchase Orders', 'key' => 'purchase_orders.receive'],
+            ['name' => 'Cancel Purchase Orders', 'key' => 'purchase_orders.cancel'],
         ];
 
         foreach ($permissions as $permission) {
