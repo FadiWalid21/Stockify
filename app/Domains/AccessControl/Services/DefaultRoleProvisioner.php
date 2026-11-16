@@ -44,6 +44,10 @@ class DefaultRoleProvisioner
                     'transfers.approve',
                     'transfers.dispatch',
                     'transfers.receive',
+                    'suppliers.view',
+                    'suppliers.create',
+                    'suppliers.update',
+                    'suppliers.delete',
                 ],
             ],
 
