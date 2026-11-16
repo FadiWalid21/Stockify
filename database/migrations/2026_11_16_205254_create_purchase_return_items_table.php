@@ -33,41 +33,72 @@ return new class extends Migration
                 'purchase_return_items_return_id_unique'
             );
 
-            $table->foreign(
-                ['company_id', 'purchase_return_id']
-            )->references(
-                ['company_id', 'id']
-            )->on('purchase_returns')->cascadeOnDelete();
+            // Purchase return relationship
+            $table->foreign(['company_id', 'purchase_return_id'])
+                ->references(['company_id', 'id'])
+                ->on('purchase_returns')
+                ->cascadeOnDelete();
 
-            $table->foreign(
-                ['company_id', 'purchase_order_id']
-            )->references(
-                ['company_id', 'id']
-            )->on('purchase_orders')->restrictOnDelete();
+            // Purchase order relationship
+            $table->foreign(['company_id', 'purchase_order_id'])
+                ->references(['company_id', 'id'])
+                ->on('purchase_orders')
+                ->restrictOnDelete();
 
-            $table->foreign(
-                ['company_id', 'purchase_order_item_id', 'purchase_order_id']
-            )->references(
-                ['company_id', 'id', 'purchase_order_id']
-            )->on('purchase_order_items')->restrictOnDelete();
+            // Purchase order item relationship
+            $table->foreign([
+                'company_id',
+                'purchase_order_id',
+                'purchase_order_item_id',
+            ], 'purchase_return_items_order_item_fk')
+                ->references([
+                    'company_id',
+                    'purchase_order_id',
+                    'id',
+                ])
+                ->on('purchase_order_items')
+                ->restrictOnDelete();
 
-            $table->foreign(
-                ['company_id', 'purchase_order_receipt_id', 'purchase_order_id']
-            )->references(
-                ['company_id', 'id', 'purchase_order_id']
-            )->on('purchase_order_receipts')->restrictOnDelete();
+            // Purchase order receipt relationship
+            $table->foreign([
+                'company_id',
+                'purchase_order_id',
+                'purchase_order_receipt_id',
+            ], 'purchase_return_items_receipt_fk')
+                ->references([
+                    'company_id',
+                    'purchase_order_id',
+                    'id',
+                ])
+                ->on('purchase_order_receipts')
+                ->restrictOnDelete();
 
-            $table->foreign(
-                ['company_id', 'purchase_order_receipt_item_id', 'purchase_order_receipt_id']
-            )->references(
-                ['company_id', 'id', 'purchase_order_receipt_id']
-            )->on('purchase_order_receipt_items')->restrictOnDelete();
+            // Purchase order receipt item relationship
+            $table->foreign([
+                'company_id',
+                'purchase_order_id',
+                'purchase_order_receipt_id',
+                'purchase_order_receipt_item_id',
+            ], 'purchase_return_items_receipt_item_fk')
+                ->references([
+                    'company_id',
+                    'purchase_order_id',
+                    'purchase_order_receipt_id',
+                    'id',
+                ])
+                ->on('purchase_order_receipt_items')
+                ->restrictOnDelete();
 
-            $table->foreign(
-                ['company_id', 'product_id']
-            )->references(
-                ['company_id', 'id']
-            )->on('products')->restrictOnDelete();
+            // Product relationship
+            $table->foreign(['company_id', 'product_id'])
+                ->references(['company_id', 'id'])
+                ->on('products')
+                ->restrictOnDelete();
+
+            $table->index(
+                ['company_id', 'purchase_order_receipt_item_id'],
+                'purchase_return_items_receipt_item_index'
+            );
         });
     }
 
