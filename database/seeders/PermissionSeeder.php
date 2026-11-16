@@ -63,6 +63,15 @@ class PermissionSeeder extends Seeder
             ['name' => 'Delete Customers', 'key' => 'customers.delete'],
             ['name' => 'Activate Customers', 'key' => 'customers.activate'],
             ['name' => 'Deactivate Customers', 'key' => 'customers.deactivate'],
+
+            // Sales
+            ['name' => 'View Sales Orders', 'key' => 'sales_orders.view'],
+            ['name' => 'Create Sales Orders', 'key' => 'sales_orders.create'],
+            ['name' => 'Update Sales Orders', 'key' => 'sales_orders.update'],
+            ['name' => 'Place Sales Orders', 'key' => 'sales_orders.place'],
+            ['name' => 'Confirm Sales Orders', 'key' => 'sales_orders.confirm'],
+            ['name' => 'Cancel Sales Orders', 'key' => 'sales_orders.cancel'],
+            ['name' => 'Dispatch Sales Orders', 'key' => 'sales_orders.dispatch'],
         ];
 
         foreach ($permissions as $permission) {

@@ -7,6 +7,7 @@ use App\Domains\Company\Models\TenantModel;
 use App\Domains\Inventory\Models\InventoryBalance;
 use App\Domains\Inventory\Models\StockMovement;
 use App\Domains\Purchase\Models\PurchaseOrder;
+use App\Domains\Sales\Models\SalesOrder;
 use App\Domains\Transfer\Models\StockTransfer;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
@@ -44,5 +45,10 @@ class Warehouse extends TenantModel
     public function purchaseOrders(): HasMany
     {
         return $this->hasMany(PurchaseOrder::class);
+    }
+
+    public function salesOrders(): HasMany
+    {
+        return $this->hasMany(SalesOrder::class);
     }
 }

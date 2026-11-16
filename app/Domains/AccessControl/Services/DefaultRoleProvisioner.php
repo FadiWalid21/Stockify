@@ -60,6 +60,13 @@ class DefaultRoleProvisioner
                     'customers.delete',
                     'customers.activate',
                     'customers.deactivate',
+                    'sales_orders.view',
+                    'sales_orders.create',
+                    'sales_orders.update',
+                    'sales_orders.place',
+                    'sales_orders.confirm',
+                    'sales_orders.cancel',
+                    'sales_orders.dispatch',
                 ],
             ],
 
@@ -77,6 +84,8 @@ class DefaultRoleProvisioner
                     'transfers.receive',
                     'purchase_orders.view',
                     'purchase_orders.receive',
+                    'sales_orders.view',
+                    'sales_orders.dispatch',
                 ],
             ],
         ];

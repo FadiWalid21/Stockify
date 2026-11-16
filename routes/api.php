@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\V1\CustomerController;
 use App\Http\Controllers\Api\V1\InventoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\PurchaseOrderController;
+use App\Http\Controllers\Api\V1\SalesOrderController;
 use App\Http\Controllers\Api\V1\StockTransferController;
 use App\Http\Controllers\Api\V1\SupplierController;
 use App\Http\Controllers\Api\V1\UnitController;
@@ -230,6 +231,43 @@ Route::prefix('v1')->group(function () {
         Route::patch('/customers/{customer}/deactivate',
         [CustomerController::class, 'deactivate'])
             ->middleware('permission:customers.deactivate');
+
+        Route::get('/sales-orders',
+        [SalesOrderController::class, 'index'])
+            ->middleware('permission:sales_orders.view');
+
+        Route::post('/sales-orders',
+        [SalesOrderController::class, 'store'])
+            ->middleware('permission:sales_orders.create');
+
+        Route::get('/sales-orders/{salesOrderId}',
+        [SalesOrderController::class, 'show'])
+            ->middleware('permission:sales_orders.view');
+
+        Route::put('/sales-orders/{salesOrderId}',
+        [SalesOrderController::class, 'update'])
+            ->middleware('permission:sales_orders.update');
+
+        Route::patch('/sales-orders/{salesOrderId}',
+        [SalesOrderController::class, 'update'])
+            ->middleware('permission:sales_orders.update');
+
+        Route::post('/sales-orders/{salesOrderId}/place',
+        [SalesOrderController::class, 'place'])
+            ->middleware('permission:sales_orders.place');
+
+        Route::post('/sales-orders/{salesOrderId}/confirm',
+        [SalesOrderController::class, 'confirm'])
+            ->middleware('permission:sales_orders.confirm');
+
+        Route::post('/sales-orders/{salesOrderId}/cancel',
+        [SalesOrderController::class, 'cancel'])
+            ->middleware('permission:sales_orders.cancel');
+
+        Route::post('/sales-orders/{salesOrderId}/dispatch',
+        [SalesOrderController::class, 'dispatch'])
+            ->middleware('permission:sales_orders.dispatch');
+
         // Categories
         Route::apiResource('categories', CategoryController::class);
 
