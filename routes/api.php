@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\Auth\PasswordResetController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\Auth\VerifyEmailController;
 use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\CustomerController;
 use App\Http\Controllers\Api\V1\InventoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\PurchaseOrderController;
@@ -197,6 +198,38 @@ Route::prefix('v1')->group(function () {
         [PurchaseOrderController::class, 'receive'])
             ->middleware('permission:purchase_orders.receive');
 
+            // Customers
+        Route::get('/customers',
+        [CustomerController::class, 'index'])
+            ->middleware('permission:customers.view');
+
+        Route::post('/customers',
+        [CustomerController::class, 'store'])
+            ->middleware('permission:customers.create');
+
+        Route::get('/customers/{customer}',
+        [CustomerController::class, 'show'])
+            ->middleware('permission:customers.view');
+
+        Route::put('/customers/{customer}',
+        [CustomerController::class, 'update'])
+            ->middleware('permission:customers.update');
+
+        Route::patch('/customers/{customer}',
+        [CustomerController::class, 'update'])
+            ->middleware('permission:customers.update');
+
+        Route::delete('/customers/{customer}',
+        [CustomerController::class, 'destroy'])
+            ->middleware('permission:customers.delete');
+
+        Route::patch('/customers/{customer}/activate',
+        [CustomerController::class, 'activate'])
+            ->middleware('permission:customers.activate');
+
+        Route::patch('/customers/{customer}/deactivate',
+        [CustomerController::class, 'deactivate'])
+            ->middleware('permission:customers.deactivate');
         // Categories
         Route::apiResource('categories', CategoryController::class);
 

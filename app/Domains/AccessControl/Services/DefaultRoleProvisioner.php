@@ -54,6 +54,12 @@ class DefaultRoleProvisioner
                     'purchase_orders.approve',
                     'purchase_orders.receive',
                     'purchase_orders.cancel',
+                    'customers.view',
+                    'customers.create',
+                    'customers.update',
+                    'customers.delete',
+                    'customers.activate',
+                    'customers.deactivate',
                 ],
             ],
 

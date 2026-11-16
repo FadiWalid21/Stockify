@@ -4,6 +4,7 @@ namespace App\Domains\Company\Models;
 
 use App\Domains\AccessControl\Models\Role;
 use App\Domains\Category\Models\Category;
+use App\Domains\Customer\Models\Customer;
 use App\Domains\Supplier\Models\Supplier;
 use App\Domains\User\Models\User;
 use App\Domains\Warehouse\Models\Warehouse;
@@ -46,5 +47,10 @@ class Company extends Model
     public function suppliers(): HasMany
     {
         return $this->hasMany(Supplier::class);
+    }
+
+    public function customers(): HasMany
+    {
+        return $this->hasMany(Customer::class);
     }
 }
