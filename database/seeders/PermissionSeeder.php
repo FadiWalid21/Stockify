@@ -48,13 +48,20 @@ class PermissionSeeder extends Seeder
             ['name' => 'Update Suppliers', 'key' => 'suppliers.update'],
             ['name' => 'Delete Suppliers', 'key' => 'suppliers.delete'],
 
-            // Purchase
+            // Purchase Orders
             ['name' => 'View Purchase Orders', 'key' => 'purchase_orders.view'],
             ['name' => 'Create Purchase Orders', 'key' => 'purchase_orders.create'],
             ['name' => 'Update Purchase Orders', 'key' => 'purchase_orders.update'],
             ['name' => 'Approve Purchase Orders', 'key' => 'purchase_orders.approve'],
             ['name' => 'Receive Purchase Orders', 'key' => 'purchase_orders.receive'],
             ['name' => 'Cancel Purchase Orders', 'key' => 'purchase_orders.cancel'],
+
+            // Purchase Returns
+            ['name' => 'View Purchase Returns', 'key' => 'purchase_returns.view'],
+            ['name' => 'Create Purchase Returns', 'key' => 'purchase_returns.create'],
+            ['name' => 'Approve Purchase Returns', 'key' => 'purchase_returns.approve'],
+            ['name' => 'Dispatch Purchase Returns', 'key' => 'purchase_returns.dispatch'],
+            ['name' => 'Cancel Purchase Returns', 'key' => 'purchase_returns.cancel'],
 
             // Customers
             ['name' => 'View Customers', 'key' => 'customers.view'],
@@ -64,7 +71,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'Activate Customers', 'key' => 'customers.activate'],
             ['name' => 'Deactivate Customers', 'key' => 'customers.deactivate'],
 
-            // Sales
+            // Sales Orders
             ['name' => 'View Sales Orders', 'key' => 'sales_orders.view'],
             ['name' => 'Create Sales Orders', 'key' => 'sales_orders.create'],
             ['name' => 'Update Sales Orders', 'key' => 'sales_orders.update'],
