@@ -48,6 +48,12 @@ class DefaultRoleProvisioner
                     'suppliers.create',
                     'suppliers.update',
                     'suppliers.delete',
+                    'purchase_orders.view',
+                    'purchase_orders.create',
+                    'purchase_orders.update',
+                    'purchase_orders.approve',
+                    'purchase_orders.receive',
+                    'purchase_orders.cancel',
                 ],
             ],
 
@@ -63,6 +69,8 @@ class DefaultRoleProvisioner
                     'transfers.view',
                     'transfers.dispatch',
                     'transfers.receive',
+                    'purchase_orders.view',
+                    'purchase_orders.receive',
                 ],
             ],
         ];

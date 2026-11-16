@@ -6,6 +6,7 @@ use App\Domains\Company\Models\Company;
 use App\Domains\Company\Models\TenantModel;
 use App\Domains\Inventory\Models\InventoryBalance;
 use App\Domains\Inventory\Models\StockMovement;
+use App\Domains\Purchase\Models\PurchaseOrder;
 use App\Domains\Transfer\Models\StockTransfer;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
@@ -38,5 +39,10 @@ class Warehouse extends TenantModel
     public function incomingTransfers(): HasMany
     {
         return $this->hasMany(StockTransfer::class, 'to_warehouse_id');
+    }
+
+    public function purchaseOrders(): HasMany
+    {
+        return $this->hasMany(PurchaseOrder::class);
     }
 }

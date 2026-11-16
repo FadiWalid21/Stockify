@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\Auth\VerifyEmailController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\InventoryController;
 use App\Http\Controllers\Api\V1\ProductController;
+use App\Http\Controllers\Api\V1\PurchaseOrderController;
 use App\Http\Controllers\Api\V1\StockTransferController;
 use App\Http\Controllers\Api\V1\SupplierController;
 use App\Http\Controllers\Api\V1\UnitController;
@@ -167,6 +168,34 @@ Route::prefix('v1')->group(function () {
         Route::patch('/suppliers/{supplier}/deactivate',
         [SupplierController::class, 'deactivate'])
             ->middleware('permission:suppliers.update');
+
+        Route::get('/purchase-orders',
+        [PurchaseOrderController::class, 'index'])
+            ->middleware('permission:purchase_orders.view');
+
+        Route::post('/purchase-orders',
+        [PurchaseOrderController::class, 'store'])
+            ->middleware('permission:purchase_orders.create');
+
+        Route::get('/purchase-orders/{purchaseOrder}',
+        [PurchaseOrderController::class, 'show'])
+            ->middleware('permission:purchase_orders.view');
+
+        Route::match(['put', 'patch'], '/purchase-orders/{purchaseOrder}',
+        [PurchaseOrderController::class, 'update'])
+            ->middleware('permission:purchase_orders.update');
+
+        Route::post('/purchase-orders/{purchaseOrder}/approve',
+        [PurchaseOrderController::class, 'approve'])
+            ->middleware('permission:purchase_orders.approve');
+
+        Route::post('/purchase-orders/{purchaseOrder}/cancel',
+        [PurchaseOrderController::class, 'cancel'])
+            ->middleware('permission:purchase_orders.cancel');
+
+        Route::post('/purchase-orders/{purchaseOrder}/receive',
+        [PurchaseOrderController::class, 'receive'])
+            ->middleware('permission:purchase_orders.receive');
 
         // Categories
         Route::apiResource('categories', CategoryController::class);

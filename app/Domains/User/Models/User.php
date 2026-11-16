@@ -6,6 +6,8 @@ namespace App\Domains\User\Models;
 
 use App\Domains\AccessControl\Models\Role;
 use App\Domains\Company\Models\Company;
+use App\Domains\Purchase\Models\PurchaseOrder;
+use App\Domains\Purchase\Models\PurchaseOrderReceipt;
 use App\Domains\User\Notifications\ResetPasswordNotification;
 use App\Domains\User\Notifications\VerifyEmailNotification;
 use Database\Factories\UserFactory;
@@ -15,6 +17,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -66,5 +69,25 @@ class User extends Authenticatable implements MustVerifyEmail{
     public function sendEmailVerificationNotification(): void
     {
         $this->notify(new VerifyEmailNotification());
+    }
+
+    public function createdPurchaseOrders(): HasMany
+    {
+        return $this->hasMany(PurchaseOrder::class, 'user_id');
+    }
+
+    public function approvedPurchaseOrders(): HasMany
+    {
+        return $this->hasMany(PurchaseOrder::class, 'approved_by');
+    }
+
+    public function cancelledPurchaseOrders(): HasMany
+    {
+        return $this->hasMany(PurchaseOrder::class, 'cancelled_by');
+    }
+
+    public function purchaseOrderReceipts(): HasMany
+    {
+        return $this->hasMany(PurchaseOrderReceipt::class, 'user_id');
     }
 }
