@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\PurchaseOrderController;
 use App\Http\Controllers\Api\V1\PurchaseReturnController;
 use App\Http\Controllers\Api\V1\SalesOrderController;
+use App\Http\Controllers\Api\V1\SalesReturnController;
 use App\Http\Controllers\Api\V1\StockTransferController;
 use App\Http\Controllers\Api\V1\SupplierController;
 use App\Http\Controllers\Api\V1\UnitController;
@@ -298,6 +299,38 @@ Route::prefix('v1')->group(function () {
         [PurchaseReturnController::class, 'cancel'])
             ->middleware('permission:purchase_returns.cancel');
 
+        // Sales Returns
+        Route::get('/sales-returns',
+        [SalesReturnController::class, 'index'])
+            ->middleware('permission:sales_returns.view');
+
+        Route::post('/sales-returns',
+        [SalesReturnController::class, 'store'])
+            ->middleware('permission:sales_returns.create');
+
+        Route::get('/sales-returns/eligible-items',
+        [SalesReturnController::class, 'eligibleItems'])
+            ->middleware('permission:sales_returns.view');
+
+        Route::get('/sales-returns/{salesReturn}',
+        [SalesReturnController::class, 'show'])
+            ->middleware('permission:sales_returns.view');
+
+        Route::post('/sales-returns/{salesReturn}/approve',
+        [SalesReturnController::class, 'approve'])
+            ->middleware('permission:sales_returns.approve');
+
+        Route::post('/sales-returns/{salesReturn}/receive',
+        [SalesReturnController::class, 'receive'])
+            ->middleware('permission:sales_returns.receive');
+
+        Route::post('/sales-returns/{salesReturn}/complete',
+        [SalesReturnController::class, 'complete'])
+            ->middleware('permission:sales_returns.complete');
+
+        Route::post('/sales-returns/{salesReturn}/cancel',
+        [SalesReturnController::class, 'cancel'])
+            ->middleware('permission:sales_returns.cancel');
 
         // Categories
         Route::apiResource('categories', CategoryController::class);

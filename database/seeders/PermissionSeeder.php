@@ -79,6 +79,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'Confirm Sales Orders', 'key' => 'sales_orders.confirm'],
             ['name' => 'Cancel Sales Orders', 'key' => 'sales_orders.cancel'],
             ['name' => 'Dispatch Sales Orders', 'key' => 'sales_orders.dispatch'],
+
+            // Sales Returns
+            ['name' => 'View Sales Returns', 'key' => 'sales_returns.view'],
+            ['name' => 'Create Sales Returns', 'key' => 'sales_returns.create'],
+            ['name' => 'Approve Sales Returns', 'key' => 'sales_returns.approve'],
+            ['name' => 'Receive Sales Returns', 'key' => 'sales_returns.receive'],
+            ['name' => 'Complete Sales Returns', 'key' => 'sales_returns.complete'],
+            ['name' => 'Cancel Sales Returns', 'key' => 'sales_returns.cancel'],
         ];
 
         foreach ($permissions as $permission) {

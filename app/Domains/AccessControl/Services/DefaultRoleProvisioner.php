@@ -81,6 +81,13 @@ class DefaultRoleProvisioner
                     'sales_orders.confirm',
                     'sales_orders.cancel',
                     'sales_orders.dispatch',
+
+                    'sales_returns.view',
+                    'sales_returns.create',
+                    'sales_returns.approve',
+                    'sales_returns.receive',
+                    'sales_returns.complete',
+                    'sales_returns.cancel',
                 ],
             ],
 
@@ -101,6 +108,8 @@ class DefaultRoleProvisioner
                     'purchase_returns.view',
                     'sales_orders.view',
                     'sales_orders.dispatch',
+                    'sales_returns.view',
+                    'sales_returns.receive',
                 ],
             ],
         ];
