@@ -12,7 +12,9 @@ use App\Http\Controllers\Api\V1\InventoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\PurchaseOrderController;
 use App\Http\Controllers\Api\V1\PurchaseReturnController;
+use App\Http\Controllers\Api\V1\SalesInvoiceController;
 use App\Http\Controllers\Api\V1\SalesOrderController;
+use App\Http\Controllers\Api\V1\SalesPaymentController;
 use App\Http\Controllers\Api\V1\SalesReturnController;
 use App\Http\Controllers\Api\V1\StockTransferController;
 use App\Http\Controllers\Api\V1\SupplierController;
@@ -332,6 +334,54 @@ Route::prefix('v1')->group(function () {
         [SalesReturnController::class, 'cancel'])
             ->middleware('permission:sales_returns.cancel');
 
+
+        // Sales Invoices
+
+        Route::get('/sales-invoices',
+            [SalesInvoiceController::class, 'index'])
+            ->middleware('permission:sales_invoices.view');
+
+        Route::post('/sales-invoices',
+            [SalesInvoiceController::class, 'store'])
+            ->middleware('permission:sales_invoices.create');
+
+        Route::get('/sales-invoices/{invoiceId}',
+            [SalesInvoiceController::class, 'show'])
+            ->middleware('permission:sales_invoices.view');
+
+        Route::post('/sales-invoices/{invoiceId}/issue',
+            [SalesInvoiceController::class, 'issue'])
+            ->middleware('permission:sales_invoices.issue');
+
+        Route::post('/sales-invoices/{invoiceId}/cancel',
+            [SalesInvoiceController::class, 'cancel'])
+            ->middleware('permission:sales_invoices.cancel');
+
+            // Sales Payments
+        Route::post('/sales-payments',
+        [SalesPaymentController::class, 'store'])
+            ->middleware('permission:sales_payments.create');
+
+        // Sales Payments
+        Route::get('/sales-payments',
+        [SalesPaymentController::class, 'index'])
+            ->middleware('permission:sales_payments.view');
+
+        Route::post('/sales-payments',
+        [SalesPaymentController::class, 'store'])
+            ->middleware('permission:sales_payments.create');
+
+        Route::get('/sales-payments/{paymentId}',
+        [SalesPaymentController::class, 'show'])
+            ->middleware('permission:sales_payments.view');
+
+        Route::post('/sales-payments/{paymentId}/cancel',
+        [SalesPaymentController::class,'cancel',])
+            ->middleware('permission:sales_payments.cancel');
+            
+        Route::post('/sales-payments/{paymentId}/allocate',
+        [SalesPaymentController::class, 'allocate'])
+            ->middleware('permission:sales_payments.create');
         // Categories
         Route::apiResource('categories', CategoryController::class);
 

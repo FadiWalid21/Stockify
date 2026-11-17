@@ -88,6 +88,15 @@ class DefaultRoleProvisioner
                     'sales_returns.receive',
                     'sales_returns.complete',
                     'sales_returns.cancel',
+
+                    'sales_invoices.view',
+                    'sales_invoices.create',
+                    'sales_invoices.issue',
+                    'sales_invoices.cancel',
+
+                    'sales_payments.view',
+                    'sales_payments.create',
+                    'sales_payments.cancel',
                 ],
             ],
 

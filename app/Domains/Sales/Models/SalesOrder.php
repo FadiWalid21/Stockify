@@ -76,4 +76,9 @@ class SalesOrder extends TenantModel
     {
         return $this->hasMany(SalesOrderFulfillment::class);
     }
+
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(SalesInvoice::class);
+    }
 }

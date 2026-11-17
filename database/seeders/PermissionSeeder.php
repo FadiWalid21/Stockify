@@ -87,6 +87,19 @@ class PermissionSeeder extends Seeder
             ['name' => 'Receive Sales Returns', 'key' => 'sales_returns.receive'],
             ['name' => 'Complete Sales Returns', 'key' => 'sales_returns.complete'],
             ['name' => 'Cancel Sales Returns', 'key' => 'sales_returns.cancel'],
+
+
+            // Sales Invoices
+            ['name' => 'View Sales Invoices', 'key' => 'sales_invoices.view'],
+            ['name' => 'Create Sales Invoices', 'key' => 'sales_invoices.create'],
+            ['name' => 'Issue Sales Invoices', 'key' => 'sales_invoices.issue'],
+            ['name' => 'Cancel Sales Invoices', 'key' => 'sales_invoices.cancel'],
+
+            // Sales Payments
+            ['name' => 'View Sales Payments', 'key' => 'sales_payments.view'],
+            ['name' => 'Create Sales Payments', 'key' => 'sales_payments.create'],
+            ['name' => 'Cancel Sales Payments', 'key' => 'sales_payments.cancel'],
+
         ];
 
         foreach ($permissions as $permission) {
