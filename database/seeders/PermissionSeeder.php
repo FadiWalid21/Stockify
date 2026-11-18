@@ -100,6 +100,13 @@ class PermissionSeeder extends Seeder
             ['name' => 'Create Sales Payments', 'key' => 'sales_payments.create'],
             ['name' => 'Cancel Sales Payments', 'key' => 'sales_payments.cancel'],
 
+            // Reporting
+
+            ['name' => 'View Sales Reports', 'key' => 'reports.sales.view'],
+            ['name' => 'View Purchase Reports', 'key' => 'reports.purchases.view'],
+            ['name' => 'View Inventory Reports', 'key' => 'reports.inventory.view'],
+            ['name' => 'View Financial Reports', 'key' => 'reports.financial.view'],
+            
         ];
 
         foreach ($permissions as $permission) {

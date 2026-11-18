@@ -12,6 +12,14 @@ use App\Http\Controllers\Api\V1\InventoryController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\PurchaseOrderController;
 use App\Http\Controllers\Api\V1\PurchaseReturnController;
+use App\Http\Controllers\Api\V1\Reporting\CustomerReportController;
+use App\Http\Controllers\Api\V1\Reporting\FinancialSummaryReportController;
+use App\Http\Controllers\Api\V1\Reporting\InventoryReportController;
+use App\Http\Controllers\Api\V1\Reporting\ProductPerformanceReportController;
+use App\Http\Controllers\Api\V1\Reporting\PurchaseReportController;
+use App\Http\Controllers\Api\V1\Reporting\SalesReportController;
+use App\Http\Controllers\Api\V1\Reporting\StockMovementReportController;
+use App\Http\Controllers\Api\V1\Reporting\SupplierReportController;
 use App\Http\Controllers\Api\V1\SalesInvoiceController;
 use App\Http\Controllers\Api\V1\SalesOrderController;
 use App\Http\Controllers\Api\V1\SalesPaymentController;
@@ -357,11 +365,6 @@ Route::prefix('v1')->group(function () {
             [SalesInvoiceController::class, 'cancel'])
             ->middleware('permission:sales_invoices.cancel');
 
-            // Sales Payments
-        Route::post('/sales-payments',
-        [SalesPaymentController::class, 'store'])
-            ->middleware('permission:sales_payments.create');
-
         // Sales Payments
         Route::get('/sales-payments',
         [SalesPaymentController::class, 'index'])
@@ -382,6 +385,74 @@ Route::prefix('v1')->group(function () {
         Route::post('/sales-payments/{paymentId}/allocate',
         [SalesPaymentController::class, 'allocate'])
             ->middleware('permission:sales_payments.create');
+
+        // Reporting
+        Route::get('/reports/sales/revenue',
+        [SalesReportController::class,'revenue',])
+            ->middleware('permission:reports.sales.view');
+        
+        Route::get('/reports/sales/by-customer',
+        [SalesReportController::class,'byCustomer',])
+            ->middleware('permission:reports.sales.view');
+
+        Route::get('/reports/sales/by-product',
+        [SalesReportController::class,'byProduct',])
+            ->middleware('permission:reports.sales.view');
+
+        Route::get('/reports/sales/invoice-status',
+        [SalesReportController::class, 'invoiceStatus'])
+            ->middleware('permission:reports.sales.view');
+
+        Route::get('/reports/sales/trend',
+        [SalesReportController::class, 'salesTrend'])
+            ->middleware('permission:reports.sales.view');
+
+        Route::get('/reports/sales/returns',
+        [SalesReportController::class, 'salesReturns'])
+            ->middleware('permission:reports.sales.view');
+        
+        //Purchases Reports
+        Route::get('/reports/purchases/summary',
+        [PurchaseReportController::class, 'summary'])
+        ->middleware('permission:reports.purchases.view');
+
+        //Inventory Reports
+        Route::get('/reports/inventory/summary',
+        [InventoryReportController::class, 'summary'])
+            ->middleware('permission:reports.inventory.view');
+
+        Route::get('/reports/inventory/by-warehouse',
+        [InventoryReportController::class, 'byWarehouse'])
+            ->middleware('permission:reports.inventory.view');
+
+        Route::get('/reports/inventory/products',
+        [InventoryReportController::class, 'products'])
+            ->middleware('permission:reports.inventory.view');
+
+        Route::get('/reports/inventory/movements/summary',
+        [StockMovementReportController::class, 'summary'])
+            ->middleware('permission:reports.inventory.view');
+
+        Route::get('/reports/inventory/movements',
+        [StockMovementReportController::class, 'movements'])
+            ->middleware('permission:reports.inventory.view');
+
+        Route::get('/reports/products/top-selling',
+        [ProductPerformanceReportController::class, 'topSelling'])
+            ->middleware('permission:reports.sales.view');
+
+        Route::get('/reports/customers/sales-summary',
+        [CustomerReportController::class, 'salesSummary'])
+            ->middleware('permission:reports.sales.view');
+
+        Route::get('/reports/suppliers/purchase-summary',
+        [SupplierReportController::class, 'purchaseSummary'])
+            ->middleware('permission:reports.purchases.view');
+
+        // Financial Reports
+        Route::get('/reports/financial/summary',
+        [FinancialSummaryReportController::class, 'summary'])
+            ->middleware('permission:reports.financial.view');
         // Categories
         Route::apiResource('categories', CategoryController::class);
 

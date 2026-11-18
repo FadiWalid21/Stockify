@@ -97,6 +97,11 @@ class DefaultRoleProvisioner
                     'sales_payments.view',
                     'sales_payments.create',
                     'sales_payments.cancel',
+
+                    'reports.sales.view',
+                    'reports.purchases.view',
+                    'reports.inventory.view',
+                    'reports.financial.view',
                 ],
             ],
 
